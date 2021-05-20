@@ -1,0 +1,45 @@
+<!DOCTYPE html><html><head><meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" type="text/css" href="common.css">
+<script type="text/javascript">
+	function chk() {
+		if (frm.password.value != frm.confirmPass.value) {
+			alert('암호와 암호 확인이 다릅니다'); 
+			frm.password.focus();   // 커서를 paswword에 갖다 놔라
+			frm.password.value= ""; // 현재 입력한 암호를 지워리  
+			return false; // submit 명령을 취소 하라
+		}
+		if (frm.job[frm.job.selectedIndex].value=="직접입력") {
+			if (!frm.job2.value) {
+				alert("직업을 입력하세요");
+				frm.job2.focus();
+				return false;
+			} else {
+				frm.job[frm.job.selectedIndex].value = frm.job2.value;
+			}
+		}
+	}  /* onsubmit submit할 때 chk()함수를 실행하고 결과를 확인하여 action 실행을 결정 */
+</script></head><body>
+<form action="Member" method="post" name="frm" onsubmit="return chk()">
+<table><caption>회원 가입</caption>
+	<tr><th>이름</th><td><input type="text" name="name" required="required" autofocus="autofocus"></td></tr>
+	<tr><th>아이디</th><td><input type="text" name="id" required="required"></td></tr>
+	<tr><th>암호</th><td><input type="password" name="password" required="required"></td></tr>
+	<tr><th>암호확인</th><td><input type="password" name="confirmPass" required="required"></td></tr>
+	<tr><th>성별</th><td><label for="g1">남자</label><input type="radio" name="gender" value="남자" id="g1">
+		<label for="g2">여자</label><input type="radio" name="gender" value="여자" id="g2" checked="checked">
+	</td></tr>
+	<tr><th>메일수신</th><td>
+		<label for="m1">공지</label><input type="checkbox" name="mail" id ="m1" value="공지">	
+		<label for="m2">광고</label><input type="checkbox" name="mail" id ="m2" value="광고">	
+		<label for="m3">배송</label><input type="checkbox" name="mail" id ="m3" value="배송"></td></tr>
+	<tr><th>직업</th><td><select name="job"><option>직접입력<option>회사원
+		<option>수강생<option>기타</select>
+		<input type="text" name="job2" >	
+	</td></tr>
+	<tr><th colspan="2"><input type="submit" value="확인"> 
+						<input type="reset" value="취소"></th></tr>	
+</table>
+</form>
+</body>
+</html>
